@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -51,9 +53,15 @@ public class ContainerActivity extends AppCompatActivity {
         // First we need a sorted list of the numbers to iterate through.
         Integer[] sortedNumbers = coolestRandomNumbers.clone();
 
-        Map<Integer, Integer> map = new HashMap<>(sortedNumbers.length);
+        Map<Integer, List<Integer>> map = new HashMap<>(sortedNumbers.length);
         for (int i = 0; i < sortedNumbers.length; i++) {
-            map.put(sortedNumbers[i], i);
+            List<Integer> indexes = map.get(sortedNumbers[i]);
+            if (indexes == null) {
+                indexes = new ArrayList<>();
+            }
+
+            indexes.add(i);
+            map.put(sortedNumbers[i], indexes);
         }
 
         Arrays.sort(sortedNumbers);
@@ -65,7 +73,10 @@ public class ContainerActivity extends AppCompatActivity {
         for (int i = 0; i < sortedNumbers.length; i++) {
             Integer currentNumber = sortedNumbers[i];
 
-            Log.i("Popularity Dump", currentNumber + ": #" + map.get(currentNumber));
+            List<Integer> indexes = map.get(currentNumber);
+            for (Integer index : indexes) {
+                Log.i("Popularity Dump", currentNumber + ": #" + index);
+            }
         }
         Trace.endSection();
     }
