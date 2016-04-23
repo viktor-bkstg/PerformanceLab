@@ -5,11 +5,10 @@
     android:orientation="vertical">
 
     <!-- Version 1. Uses nested LinearLayouts -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal">
+        android:layout_marginTop="@dimen/activity_vertical_margin">
 
         <ImageView
             android:id="@+id/chat_author_avatar1"
@@ -18,21 +17,19 @@
             android:layout_margin="@dimen/avatar_layout_margin"
             android:src="@mipmap/ic_launcher" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <TextView
+                android:id="@+id/text_line_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/chat_author_avatar1"
                 android:text="@string/line1_text" />
 
             <TextView
                 android:layout_width="match_parent"
+                android:layout_toRightOf="@+id/chat_author_avatar1"
+                android:layout_below="@+id/text_line_1"
                 android:layout_height="wrap_content"
                 android:text="@string/line2_text" />
-        </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
